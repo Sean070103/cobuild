@@ -5,6 +5,15 @@ import { useState } from 'react';
 import { Mail, MessageSquare } from 'lucide-react';
 
 export default function Contact() {
+  const projectPresets = [
+    'Full-Stack Web App',
+    'Dashboard / Admin Panel',
+    'UI/UX Design',
+    'Landing Page',
+    'API + Backend',
+    'Thesis / Documentation',
+  ];
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -102,6 +111,26 @@ export default function Contact() {
 
             <div>
               <label className="block text-sm font-medium mb-2">Project Type</label>
+              <div className="flex flex-wrap gap-2 mb-3">
+                {projectPresets.map((preset) => {
+                  const isActive = formData.project === preset;
+                  return (
+                    <button
+                      key={preset}
+                      type="button"
+                      onClick={() => setFormData((prev) => ({ ...prev, project: preset }))}
+                      disabled={submitState === 'sending'}
+                      className={`rounded-full border px-3 py-1.5 text-xs transition-colors ${
+                        isActive
+                          ? 'border-accent/60 bg-accent/20 text-accent'
+                          : 'border-border bg-background text-muted-foreground hover:text-foreground hover:border-accent/40'
+                      }`}
+                    >
+                      {preset}
+                    </button>
+                  );
+                })}
+              </div>
               <input
                 type="text"
                 name="project"

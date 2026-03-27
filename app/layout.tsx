@@ -1,10 +1,13 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { VT323 } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const pixelFont = VT323({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-pixel',
+});
 
 export const metadata: Metadata = {
   title: 'CoBuild - Full Stack Development & Design Services',
@@ -36,7 +39,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-sans antialiased">
+      <body className={`${pixelFont.variable} font-sans`}>
         {children}
         <Analytics />
       </body>

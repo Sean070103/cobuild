@@ -75,8 +75,8 @@
 }
 
 @theme inline {
-  --font-sans: 'Geist', 'Geist Fallback';
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --font-sans: var(--font-pixel), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  --font-mono: var(--font-pixel), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -126,5 +126,72 @@
   }
   body {
     @apply bg-background text-foreground;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: auto;
+    text-rendering: geometricPrecision;
   }
 }
+
+@keyframes kyleScan {
+  0% {
+    top: 12%;
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    top: 88%;
+    opacity: 0.35;
+  }
+}
+
+@keyframes kyleBlink {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+
+@keyframes kyleFloat {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0px);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateX(-50%) translateY(6px);
+    opacity: 0.9;
+  }
+}
+
+@keyframes pixelRunFast {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  48% {
+    transform: translateX(260%) translateY(-2px);
+  }
+  52% {
+    transform: translateX(260%) translateY(2px);
+  }
+  100% {
+    transform: translateX(520%) translateY(0);
+  }
+}
+
+@keyframes pixelRunSlow {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    transform: translateX(300%) translateY(1px);
+  }
+  100% {
+    transform: translateX(600%) translateY(0);
+  }
+}
+
