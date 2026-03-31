@@ -1,7 +1,7 @@
 'use client';
 
 import { Card } from '@/components/ui/card';
-import { ArrowRight, Code, Server, Layout, FileText, Palette, Zap } from 'lucide-react';
+import { Code, Server, Layout, FileText, Palette, Zap } from 'lucide-react';
 
 export default function Services() {
   const services = [
@@ -86,11 +86,6 @@ export default function Services() {
                     <p className="text-gray-300 leading-relaxed">
                       {service.description}
                     </p>
-
-                    <div className="mt-5 inline-flex items-center gap-2 text-sm text-white/85 border-b border-white/20 group-hover:border-white/50 transition-colors">
-                      <span className="font-medium">Learn more</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </div>
                   </div>
                 </Card>
               </div>

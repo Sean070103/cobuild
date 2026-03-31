@@ -1,4 +1,5 @@
 import { Github, Linkedin } from 'lucide-react';
+import Image from 'next/image';
 
 const XIcon = () => (
   <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
@@ -19,10 +20,14 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-br from-violet-500 to-cyan-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">CB</span>
-              </div>
-              <span className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-accent">CoBuild</span>
+              <Image
+                src="/main_logo.png"
+                alt="Skyrant logo mark"
+                width={64}
+                height={64}
+                className="h-10 w-10 object-contain"
+              />
+              <span className="font-bold text-white">Skyrant</span>
             </div>
             <p className="text-sm text-gray-400">
               Expert freelance team building digital solutions
@@ -51,15 +56,41 @@ export default function Footer() {
 
           <div>
             <h3 className="font-semibold mb-4 text-white">Connect</h3>
-            <div className="flex gap-4">
-              <a href="#" className="text-gray-400 hover:text-accent hover:scale-110 transition-all duration-300">
-                <Github className="w-5 h-5" />
+            <div className="flex flex-wrap gap-3">
+              <a
+                href="#"
+                className="group relative flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-black/45 text-gray-300 shadow-[0_0_22px_rgba(251,191,36,0.14)] transition-all duration-300 hover:scale-110 hover:border-amber-400/45 hover:text-amber-50 hover:shadow-[0_0_36px_rgba(251,191,36,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                aria-label="GitHub"
+              >
+                <span
+                  className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_40%,rgba(253,230,138,0.35),rgba(251,191,36,0.08),transparent_72%)] opacity-50 blur-md transition-opacity duration-300 group-hover:opacity-100"
+                  aria-hidden
+                />
+                <Github className="relative z-10 h-5 w-5 drop-shadow-[0_0_12px_rgba(253,230,138,0.4)]" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-accent hover:scale-110 transition-all duration-300">
-                <Linkedin className="w-5 h-5" />
+              <a
+                href="#"
+                className="group relative flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-black/45 text-gray-300 shadow-[0_0_22px_rgba(251,191,36,0.14)] transition-all duration-300 hover:scale-110 hover:border-amber-400/45 hover:text-amber-50 hover:shadow-[0_0_36px_rgba(251,191,36,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                aria-label="LinkedIn"
+              >
+                <span
+                  className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_40%,rgba(253,230,138,0.35),rgba(251,191,36,0.08),transparent_72%)] opacity-50 blur-md transition-opacity duration-300 group-hover:opacity-100"
+                  aria-hidden
+                />
+                <Linkedin className="relative z-10 h-5 w-5 drop-shadow-[0_0_12px_rgba(253,230,138,0.4)]" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-accent hover:scale-110 transition-all duration-300">
-                <XIcon />
+              <a
+                href="#"
+                className="group relative flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-black/45 text-gray-300 shadow-[0_0_22px_rgba(251,191,36,0.14)] transition-all duration-300 hover:scale-110 hover:border-amber-400/45 hover:text-amber-50 hover:shadow-[0_0_36px_rgba(251,191,36,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                aria-label="X"
+              >
+                <span
+                  className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_40%,rgba(253,230,138,0.35),rgba(251,191,36,0.08),transparent_72%)] opacity-50 blur-md transition-opacity duration-300 group-hover:opacity-100"
+                  aria-hidden
+                />
+                <span className="relative z-10 drop-shadow-[0_0_12px_rgba(253,230,138,0.4)]">
+                  <XIcon />
+                </span>
               </a>
             </div>
           </div>
@@ -67,7 +98,7 @@ export default function Footer() {
 
         <div className="border-t border-white/10 pt-8">
           <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-gray-400">
-            <p>&copy; 2026 CoBuild. All rights reserved.</p>
+            <p>&copy; 2026 Skyrant. All rights reserved.</p>
             <div className="flex gap-6 mt-4 sm:mt-0">
               <a href="#" className="hover:text-accent transition-colors duration-300">Privacy Policy</a>
               <a href="#" className="hover:text-accent transition-colors duration-300">Terms of Service</a>

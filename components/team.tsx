@@ -1,7 +1,5 @@
 'use client';
 
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 
 export default function Team() {
@@ -18,7 +16,8 @@ export default function Team() {
       name: 'Grant',
       role: 'CEO',
       specialty: 'Leadership & Vision',
-      gradient: 'from-violet-600 to-purple-600'
+      gradient: 'from-violet-600 to-purple-600',
+      avatarSrc: '/grantt-removebg-preview.png',
     },
     {
       name: 'Sean',
@@ -28,29 +27,11 @@ export default function Team() {
       avatarSrc: '/seanie-removebg.png'
     },
     {
-      name: 'Michael Andrew B. Mendoza',
-      role: 'Senior Developer',
-      specialty: 'Backend & APIs',
-      gradient: 'from-pink-600 to-rose-600'
-    },
-    {
       name: 'Kyle Tiongson',
       role: 'Designer',
       specialty: 'UI/UX & Design Systems',
       gradient: 'from-amber-600 to-orange-600',
       avatarSrc: '/kyleee-removebg.png'
-    },
-    {
-      name: 'Frontend Engineer',
-      role: 'Frontend Engineer',
-      specialty: 'React & Performance',
-      gradient: 'from-emerald-600 to-green-600'
-    },
-    {
-      name: 'DevOps Engineer',
-      role: 'DevOps Engineer',
-      specialty: 'Cloud & Infrastructure',
-      gradient: 'from-indigo-600 to-purple-600'
     }
   ];
 
@@ -110,6 +91,11 @@ export default function Team() {
             <div className="lg:col-span-6">
               <div className="space-y-4">
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/50 bg-accent/10 backdrop-blur-md">
+                  {featured.role === 'CEO' && (
+                    <span className="text-base leading-none" aria-hidden="true">
+                      👑
+                    </span>
+                  )}
                   <span className="text-accent text-sm font-semibold uppercase tracking-wider">
                     {featured.role}
                   </span>
@@ -132,8 +118,30 @@ export default function Team() {
             </div>
 
             {/* Visual */}
-            <div className="lg:col-span-6">
-              <div className="relative rounded-3xl border border-white/10 bg-black/30 overflow-hidden">
+            <div className="lg:col-span-6 relative">
+              {featured.role === 'CEO' && (
+                <>
+                  <div
+                    className="ceo-glow-breathe absolute -left-10 sm:-left-16 top-1/2 -translate-y-1/2 w-[min(78vw,24rem)] h-[min(92vh,30rem)] rounded-full bg-gradient-to-r from-amber-400/40 via-amber-200/20 to-transparent blur-[48px] pointer-events-none"
+                    aria-hidden="true"
+                  />
+                  <div
+                    className="ceo-glow-breathe-alt absolute -right-8 sm:-right-14 top-[28%] w-[min(65vw,20rem)] h-[min(75vh,26rem)] rounded-full bg-gradient-to-l from-white/30 via-amber-100/12 to-transparent blur-[42px] pointer-events-none"
+                    aria-hidden="true"
+                  />
+                  <div
+                    className="ceo-glow-floor absolute left-1/4 -bottom-16 w-[min(90vw,28rem)] h-40 rounded-full bg-gradient-to-t from-amber-300/25 via-transparent to-transparent blur-[36px] pointer-events-none"
+                    aria-hidden="true"
+                  />
+                </>
+              )}
+              <div
+                className={
+                  featured.role === 'CEO'
+                    ? 'relative rounded-3xl border border-amber-400/25 bg-black/30 overflow-hidden shadow-[0_0_50px_-8px_rgba(251,191,36,0.35),0_0_90px_-20px_rgba(255,255,255,0.14),inset_0_1px_0_rgba(255,255,255,0.08)]'
+                    : 'relative rounded-3xl border border-white/10 bg-black/30 overflow-hidden'
+                }
+              >
                 <div
                   className="absolute inset-0 pointer-events-none opacity-60"
                   aria-hidden="true"
@@ -154,14 +162,50 @@ export default function Team() {
                 <div className="relative z-10 p-6 sm:p-10">
                   <div className="relative aspect-[16/10] w-full">
                     {featured.avatarSrc ? (
-                      <Image
-                        src={featured.avatarSrc}
-                        alt={`${featured.name} photo`}
-                        fill
-                        sizes="(max-width: 1024px) 90vw, 42vw"
-                        className="object-contain object-left-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.65)]"
-                        priority
-                      />
+                      <>
+                        <Image
+                          src={featured.avatarSrc}
+                          alt={`${featured.name} photo`}
+                          fill
+                          sizes="(max-width: 1024px) 90vw, 42vw"
+                          className={
+                            featured.role === 'CEO'
+                              ? 'object-contain object-left-bottom drop-shadow-[0_24px_48px_rgba(0,0,0,0.75)] saturate-0 contrast-[1.12] brightness-[1.03]'
+                              : 'object-contain object-left-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.65)]'
+                          }
+                          priority
+                        />
+                        {featured.role === 'CEO' && (
+                          <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+                            <div className="ceo-glow-spot absolute inset-0 mix-blend-screen bg-[radial-gradient(ellipse_110%_65%_at_50%_-5%,rgba(255,252,245,0.28),transparent_52%)]" />
+                            <div className="absolute inset-0 shadow-[inset_0_0_80px_rgba(254,243,199,0.12)]" />
+                            <div className="ceo-glow-rim absolute inset-0 rounded-[inherit] shadow-[inset_0_0_45px_rgba(252,211,77,0.18)]" />
+                            <div className="absolute inset-0 border border-amber-200/25 shadow-[inset_0_0_0_1px_rgba(250,204,21,0.18)]" />
+                            {/* Local light pools — right side (behind badges & corners) */}
+                            <div
+                              className="ceo-glow-badge-halo absolute -top-4 -right-4 h-36 w-40 rounded-full bg-[radial-gradient(circle_at_70%_30%,rgba(253,230,138,0.45),rgba(251,191,36,0.12),transparent_68%)] blur-2xl"
+                              aria-hidden="true"
+                            />
+                            <div
+                              className="ceo-glow-badge-halo absolute -bottom-2 -right-2 h-28 w-36 rounded-full bg-[radial-gradient(circle_at_80%_70%,rgba(254,243,199,0.4),rgba(252,211,77,0.1),transparent_65%)] blur-xl"
+                              aria-hidden="true"
+                            />
+                            <div className="absolute top-3 left-3 h-10 w-10 border-l-2 border-t-2 border-amber-300/80" />
+                            <div className="absolute top-3 right-3 z-[2] h-10 w-10 border-r-2 border-t-2 border-amber-200/95 shadow-[0_0_16px_rgba(251,191,36,0.65),0_0_28px_rgba(255,255,255,0.12)]" />
+                            <div className="absolute bottom-3 left-3 h-10 w-10 border-l-2 border-b-2 border-amber-200/60" />
+                            <div className="absolute bottom-3 right-3 z-[2] h-10 w-10 border-r-2 border-b-2 border-amber-200/90 shadow-[0_0_14px_rgba(251,191,36,0.55),0_0_22px_rgba(252,211,77,0.2)]" />
+                            <div className="ceo-glow-badge absolute top-3 right-3 z-[3] bg-black/65 border border-amber-400/55 px-2.5 py-1 text-[10px] tracking-[0.2em] text-amber-100/95 uppercase shadow-[0_0_22px_rgba(251,191,36,0.55),0_0_40px_rgba(253,230,138,0.2),inset_0_1px_0_rgba(255,255,255,0.12)]">
+                              Executive
+                            </div>
+                            <div className="absolute bottom-3 left-3 z-[3] bg-black/60 border border-white/15 px-2.5 py-1 text-[10px] tracking-wider text-white/85">
+                              Skyrant · Leadership
+                            </div>
+                            <div className="ceo-glow-badge absolute bottom-3 right-3 z-[3] bg-black/55 border border-amber-400/45 px-2 py-1 text-[10px] tracking-[0.25em] text-amber-100/90 uppercase shadow-[0_0_20px_rgba(251,191,36,0.5),0_0_36px_rgba(252,211,77,0.18)]">
+                              Vision
+                            </div>
+                          </div>
+                        )}
+                      </>
                     ) : (
                       <div
                         className={`h-full w-full bg-gradient-to-br ${featured.gradient} bg-opacity-20 flex items-center justify-center`}
@@ -326,8 +370,8 @@ export default function Team() {
                     <div className="space-y-4">
                       <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/50 bg-accent/10 backdrop-blur-md">
                         <span className="text-accent text-sm font-semibold uppercase tracking-wider">
-                          {kyleFeatured.role} 🎨
-                    </span>
+                          {kyleFeatured.role}
+                        </span>
                       </div>
 
                       <h3 className="font-mono text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-white">
@@ -348,7 +392,7 @@ export default function Team() {
                   
                   {/* Visual (right side) */}
                   <div className="lg:col-span-6">
-                    <div className="relative rounded-3xl border border-white/10 bg-black/30 overflow-hidden">
+                    <div className="relative rounded-3xl border border-fuchsia-300/20 bg-black/30 overflow-hidden">
                       <div
                         className="absolute inset-0 pointer-events-none opacity-60"
                         aria-hidden="true"
@@ -361,106 +405,31 @@ export default function Team() {
                             backgroundSize: '54px 54px',
                           }}
                         />
-                        <div className="absolute left-4 top-10 w-28 h-28 bg-white/5 border border-white/10" />
-                        <div className="absolute right-10 top-24 w-10 h-10 bg-white/5 border border-white/10" />
-                        <div className="absolute bottom-10 left-14 w-44 h-20 bg-white/5 border border-white/10" />
+                        {/* Designer-themed background */}
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_25%,rgba(244,114,182,0.16),transparent_34%),radial-gradient(circle_at_78%_22%,rgba(34,211,238,0.14),transparent_30%),radial-gradient(circle_at_70%_80%,rgba(167,139,250,0.14),transparent_34%)]" />
+                        <div className="absolute left-5 top-8 w-28 h-28 border border-fuchsia-200/25 bg-fuchsia-300/5" />
+                        <div className="absolute right-7 top-14 w-20 h-20 rounded-full border border-cyan-200/20 bg-cyan-300/5" />
+                        <div className="absolute bottom-7 left-10 w-48 h-20 border border-violet-200/20 bg-violet-300/5" />
+                        <svg className="absolute right-5 bottom-5 w-32 h-20 opacity-80" viewBox="0 0 120 80" fill="none">
+                          <path d="M8 68 C24 16, 74 78, 112 12" stroke="rgba(217,70,239,0.72)" strokeWidth="2" />
+                          <circle cx="8" cy="68" r="3" fill="rgba(34,211,238,0.9)" />
+                          <circle cx="112" cy="12" r="3" fill="rgba(244,114,182,0.9)" />
+                        </svg>
+                        <div className="absolute top-3 right-3 bg-black/55 border border-fuchsia-300/30 px-2 py-1 text-[10px] tracking-wider text-fuchsia-100/90">
+                          DESIGN BG
+                        </div>
                       </div>
 
                       <div className="relative z-10 p-6 sm:p-10">
                         <div className="relative aspect-[16/10] w-full">
                           {kyleFeatured.avatarSrc ? (
-                            <>
-                              <Image
-                                src={kyleFeatured.avatarSrc}
-                                alt={`${kyleFeatured.name} photo`}
-                                fill
-                                sizes="(max-width: 1024px) 90vw, 42vw"
-                                className="object-contain object-left-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.65)]"
-                              />
-
-                              {/* Designer theme overlays */}
-                              <div className="absolute inset-0 pointer-events-none">
-                                {/* Keep face clean, put action elements around edges */}
-                                <div className="absolute inset-0 border border-white/20" />
-                                <div className="absolute inset-3 border border-white/10 border-dashed" />
-                                <div className="absolute inset-x-2 h-px bg-gradient-to-r from-transparent via-cyan-300/80 to-transparent animate-[kyleScan_3.2s_linear_infinite]" />
-                                <div className="absolute left-3 top-1/3 w-10 h-px bg-cyan-300/70 animate-[kyleBlink_1.6s_steps(2,end)_infinite]" />
-                                <div className="absolute right-3 bottom-1/3 w-12 h-px bg-violet-300/70 animate-[kyleBlink_2s_steps(2,end)_infinite]" />
-                                <div className="absolute left-1/2 top-2 -translate-x-1/2 w-20 h-6 border border-white/20 animate-[kyleFloat_6s_ease-in-out_infinite]" />
-
-                                {/* Highly visible running pixel characters */}
-                                <div className="absolute inset-x-0 top-8 h-28 overflow-hidden z-20">
-                                  <div className="absolute left-[-24%] top-1 animate-[pixelRunFast_12s_linear_infinite] drop-shadow-[0_0_12px_rgba(34,211,238,0.85)]">
-                                    <div className="bg-black/75 border border-cyan-300/70 px-2.5 py-1.5">
-                                      <svg
-                                        width="54"
-                                        height="54"
-                                        viewBox="0 0 16 16"
-                                        style={{ imageRendering: 'pixelated' }}
-                                      >
-                                        <rect x="5" y="1" width="6" height="2" fill="#ffffff" />
-                                        <rect x="4" y="3" width="8" height="5" fill="#f8fafc" />
-                                        <rect x="6" y="5" width="1" height="1" fill="#111827" />
-                                        <rect x="9" y="5" width="1" height="1" fill="#111827" />
-                                        <rect x="3" y="8" width="3" height="3" fill="#22d3ee" />
-                                        <rect x="10" y="8" width="3" height="3" fill="#a78bfa" />
-                                        <rect x="5" y="11" width="2" height="3" fill="#ffffff" />
-                                        <rect x="9" y="11" width="2" height="3" fill="#ffffff" />
-                                      </svg>
-                                    </div>
-                                  </div>
-                                  <div className="absolute left-[-40%] top-14 animate-[pixelRunSlow_16s_linear_infinite] drop-shadow-[0_0_12px_rgba(244,114,182,0.85)]">
-                                    <div className="bg-black/75 border border-fuchsia-300/70 px-2.5 py-1.5">
-                                      <svg
-                                        width="46"
-                                        height="46"
-                                        viewBox="0 0 16 16"
-                                        style={{ imageRendering: 'pixelated' }}
-                                      >
-                                        <rect x="5" y="2" width="6" height="2" fill="#ffffff" />
-                                        <rect x="4" y="4" width="8" height="4" fill="#ffffff" />
-                                        <rect x="6" y="5" width="1" height="1" fill="#111827" />
-                                        <rect x="9" y="5" width="1" height="1" fill="#111827" />
-                                        <rect x="3" y="8" width="10" height="2" fill="#fb7185" />
-                                        <rect x="5" y="10" width="2" height="3" fill="#ffffff" />
-                                        <rect x="9" y="10" width="2" height="3" fill="#ffffff" />
-                                      </svg>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <div className="absolute top-3 right-3 bg-black/60 border border-white/20 px-2 py-1 text-[10px] tracking-wider text-white/90">
-                                  DESIGN MODE 🎨
-                                </div>
-
-                                {/* Color swatches */}
-                                <div className="absolute bottom-3 left-3 flex items-center gap-1.5 bg-black/55 border border-white/15 px-2 py-1">
-                                  <span className="h-3 w-3 bg-pink-400 border border-white/30" />
-                                  <span className="h-3 w-3 bg-violet-400 border border-white/30" />
-                                  <span className="h-3 w-3 bg-cyan-300 border border-white/30" />
-                                  <span className="h-3 w-3 bg-emerald-300 border border-white/30" />
-                                </div>
-
-                                {/* Bezier-ish curve motif */}
-                                <svg
-                                  className="absolute right-4 bottom-4 w-28 h-20 opacity-80"
-                                  viewBox="0 0 112 80"
-                                  fill="none"
-                                >
-                                  <path d="M8 68 C28 10, 84 72, 104 12" stroke="rgba(196,181,253,0.9)" strokeWidth="2" />
-                                  <circle cx="8" cy="68" r="3" fill="rgba(244,114,182,0.95)" />
-                                  <circle cx="104" cy="12" r="3" fill="rgba(34,211,238,0.95)" />
-                                </svg>
-
-                                {/* Layer badges */}
-                                <div className="absolute left-3 top-14 bg-black/50 border border-white/20 px-2 py-1 text-[10px] text-white/90">
-                                  LAYER 01
-                                </div>
-                                <div className="absolute right-3 top-20 bg-black/50 border border-white/20 px-2 py-1 text-[10px] text-white/90">
-                                  FX ON
-                                </div>
-                              </div>
-                            </>
+                            <Image
+                              src={kyleFeatured.avatarSrc}
+                              alt={`${kyleFeatured.name} photo`}
+                              fill
+                              sizes="(max-width: 1024px) 90vw, 42vw"
+                              className="object-contain object-bottom object-right drop-shadow-[0_20px_40px_rgba(0,0,0,0.65)]"
+                            />
                           ) : (
                             <div
                               className={`h-full w-full bg-gradient-to-br ${kyleFeatured.gradient} bg-opacity-20 flex items-center justify-center`}
@@ -476,64 +445,51 @@ export default function Team() {
               </div>
             )}
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {membersGrid.map((member) => (
-                <Card
-                  key={member.name}
-                  className="relative overflow-hidden border border-white/10 bg-white/5 backdrop-blur-xl p-6"
-                >
-                  <div className="absolute inset-0 opacity-70 pointer-events-none">
-                    <div
-                      className={`absolute -top-20 -right-16 w-64 h-64 rounded-full bg-gradient-to-br ${member.gradient} bg-opacity-20 blur-3xl`}
-                    />
-                  </div>
-
-                  <div className="relative z-10 space-y-4">
-                    <div className="flex items-start gap-4">
+            {membersGrid.length > 0 && (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {membersGrid.map((member) => (
+                  <div
+                    key={member.name}
+                    className="relative overflow-hidden rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-6"
+                  >
+                    <div className="absolute inset-0 opacity-70 pointer-events-none">
                       <div
-                        className={`w-16 h-16 rounded-full bg-gradient-to-br ${member.gradient} bg-opacity-25 border border-white/10 flex items-center justify-center flex-shrink-0 overflow-hidden`}
-                      >
-                        {member.avatarSrc ? (
-                          <Image
-                            src={member.avatarSrc}
-                            alt={`${member.name} avatar`}
-                            width={64}
-                            height={64}
-                            className="w-full h-full object-cover"
-                          />
-                        ) : (
-                          <span className="text-white font-bold text-2xl">{getInitials(member.name)}</span>
-                        )}
-                      </div>
-                      <div className="min-w-0">
-                        <p className="text-accent text-xs font-semibold uppercase tracking-wider">
-                          {member.role}
-                        </p>
-                        <p className="text-white font-semibold text-lg truncate">
-                          {member.name}
-                        </p>
-                      </div>
+                        className={`absolute -top-20 -right-16 w-64 h-64 rounded-full bg-gradient-to-br ${member.gradient} bg-opacity-20 blur-3xl`}
+                      />
                     </div>
-
-                    <p className="text-gray-300 leading-relaxed">
-                      {member.specialty}
-                      {member.role === 'Designer' ? ' 🎨' : ''}
-                    </p>
-
-                    <div className="pt-2">
-                      <Button
-                        asChild
-                        size="sm"
-                        variant="outline"
-                        className="border-accent/50 text-white hover:bg-accent/10 transition-all duration-300"
-                      >
-                        <a href="#contact">Contact</a>
-                      </Button>
+                    <div className="relative z-10 space-y-4">
+                      <div className="flex items-start gap-4">
+                        <div
+                          className={`w-16 h-16 rounded-full bg-gradient-to-br ${member.gradient} bg-opacity-25 border border-white/10 flex items-center justify-center flex-shrink-0 overflow-hidden`}
+                        >
+                          {member.avatarSrc ? (
+                            <Image
+                              src={member.avatarSrc}
+                              alt={`${member.name} avatar`}
+                              width={64}
+                              height={64}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <span className="text-white font-bold text-2xl">{getInitials(member.name)}</span>
+                          )}
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-accent text-xs font-semibold uppercase tracking-wider">
+                            {member.role}
+                          </p>
+                          <p className="text-white font-semibold text-lg truncate">{member.name}</p>
+                        </div>
+                      </div>
+                      <p className="text-gray-300 leading-relaxed">
+                        {member.specialty}
+                        {member.role === 'Designer' ? ' 🎨' : ''}
+                      </p>
                     </div>
-                </div>
-              </Card>
-              ))}
-            </div>
+                  </div>
+                ))}
+              </div>
+            )}
         </div>
         )}
       </div>

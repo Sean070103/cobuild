@@ -162,8 +162,8 @@ export default function SampleProjects() {
                 </div>
               </CarouselItem>
             </CarouselContent>
-            <CarouselPrevious className="top-1/2 -left-4 -translate-y-1/2 bg-background/70 text-white border border-white/10 hover:bg-background/90" />
-            <CarouselNext className="top-1/2 -right-4 -translate-y-1/2 bg-background/70 text-white border border-white/10 hover:bg-background/90" />
+            <CarouselPrevious className="top-1/2 -left-4 -translate-y-1/2 h-11 w-11 rounded-full border border-white/15 bg-black/55 text-white shadow-[0_0_24px_rgba(251,191,36,0.18)] backdrop-blur-sm hover:border-amber-400/40 hover:bg-black/70 hover:shadow-[0_0_36px_rgba(251,191,36,0.42)]" />
+            <CarouselNext className="top-1/2 -right-4 -translate-y-1/2 h-11 w-11 rounded-full border border-white/15 bg-black/55 text-white shadow-[0_0_28px_rgba(251,191,36,0.28)] backdrop-blur-sm hover:border-amber-400/45 hover:bg-black/70 hover:shadow-[0_0_42px_rgba(251,191,36,0.5)]" />
           </Carousel>
 
           <div className="flex flex-wrap items-center justify-center gap-2 pt-2">

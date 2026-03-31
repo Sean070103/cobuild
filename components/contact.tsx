@@ -2,7 +2,8 @@
 
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
-import { Mail, MessageSquare } from 'lucide-react';
+import { ContactSendCat } from '@/components/contact-send-cat';
+import { cn } from '@/lib/utils';
 
 export default function Contact() {
   const projectPresets = [
@@ -20,23 +21,43 @@ export default function Contact() {
     project: '',
     message: ''
   });
-  const [submitState, setSubmitState] = useState<'idle' | 'sending' | 'sent'>('idle');
+  const [submitState, setSubmitState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Placeholder UX since the project doesn't currently have a backend handler wired up.
     setSubmitState('sending');
-    setFormData({ name: '', email: '', project: '', message: '' });
-    setSubmitState('sent');
+    setErrorMessage('');
 
-    // Return to idle so the user can submit again.
-    window.setTimeout(() => setSubmitState('idle'), 5000);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = (await res.json().catch(() => ({}))) as { error?: string };
+
+      if (!res.ok) {
+        setSubmitState('error');
+        setErrorMessage(
+          typeof data.error === 'string' ? data.error : 'Something went wrong. Please try again.',
+        );
+        return;
+      }
+
+      setSubmitState('sent');
+      setFormData({ name: '', email: '', project: '', message: '' });
+      window.setTimeout(() => setSubmitState('idle'), 6000);
+    } catch {
+      setSubmitState('error');
+      setErrorMessage('Network error. Please check your connection and try again.');
+    }
   };
 
   return (
@@ -49,36 +70,10 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12">
-          {/* Contact Info */}
-          <div className="space-y-8">
-            <div className="flex gap-4">
-              <Mail className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="font-semibold text-lg mb-2">Email</h3>
-                <p className="text-muted-foreground">hello@cobuild.dev</p>
-              </div>
-            </div>
-            <div className="flex gap-4">
-              <MessageSquare className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="font-semibold text-lg mb-2">Chat</h3>
-                <p className="text-muted-foreground">Available on Discord & Slack</p>
-              </div>
-            </div>
-            
-            <div className="pt-8 border-t border-border">
-              <p className="text-sm text-muted-foreground mb-4">
-                Response time: Usually within 24 hours
-              </p>
-              <p className="text-sm text-muted-foreground">
-                We&apos;re based globally with team members across multiple time zones
-              </p>
-            </div>
-          </div>
-
-          {/* Contact Form */}
-          <form onSubmit={handleSubmit} className="space-y-6 bg-card p-8 rounded-lg border border-border">
+        <form
+          onSubmit={handleSubmit}
+          className="mx-auto max-w-xl space-y-6 bg-card p-8 rounded-lg border border-border"
+        >
             <div>
               <label className="block text-sm font-medium mb-2">Name</label>
               <input
@@ -159,20 +154,33 @@ export default function Contact() {
               />
             </div>
 
-            <p aria-live="polite" className="text-sm text-muted-foreground">
-              {submitState === 'sending' && 'Sending...'}
-              {submitState === 'sent' && "Thank you! We'll be in touch soon."}
-            </p>
+            <ContactSendCat
+              phase={
+                submitState === 'sending'
+                  ? 'sending'
+                  : submitState === 'sent'
+                    ? 'sent'
+                    : null
+              }
+            />
+
+            {submitState === 'error' && (
+              <p aria-live="assertive" className="text-sm text-destructive">
+                {errorMessage}
+              </p>
+            )}
 
             <Button
               type="submit"
               disabled={submitState === 'sending'}
-              className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
+              className={cn(
+                'relative w-full overflow-hidden border-0 bg-white font-semibold text-neutral-950 shadow-sm hover:bg-neutral-100 disabled:opacity-60',
+                submitState === 'sending' && 'contact-send-submit-glow',
+              )}
             >
               {submitState === 'sending' ? 'Sending...' : 'Send Message'}
             </Button>
           </form>
-        </div>
       </div>
     </section>
   );

@@ -10,25 +10,13 @@ const pixelFont = VT323({
 });
 
 export const metadata: Metadata = {
-  title: 'CoBuild - Full Stack Development & Design Services',
+  title: 'Skyrant - Full Stack Development & Design Services',
   description: 'Professional freelance team offering frontend, backend, fullstack development, thesis writing, and design services.',
   generator: 'v0.app',
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: '/favicon.png',
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
   },
 }
 
