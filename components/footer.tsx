@@ -1,11 +1,10 @@
-import { Github, Linkedin } from 'lucide-react';
+import { Facebook, Linkedin } from 'lucide-react';
 import Image from 'next/image';
 
-const XIcon = () => (
-  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.207-6.807-5.974 6.807H2.882l7.732-8.835L1.227 2.25h6.802l4.721 6.237 5.461-6.237zM17.002 18.335h1.833L6.822 4.156H4.881z" />
-  </svg>
-);
+const FACEBOOK_URL =
+  'https://www.facebook.com/profile.php?id=61576399276889';
+const LINKEDIN_URL =
+  'https://www.linkedin.com/in/skyrant-tech-a77635400/?skipRedirect=true';
 
 export default function Footer() {
   return (
@@ -58,39 +57,30 @@ export default function Footer() {
             <h3 className="font-semibold mb-4 text-white">Connect</h3>
             <div className="flex flex-wrap gap-3">
               <a
-                href="#"
+                href={FACEBOOK_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group relative flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-black/45 text-gray-300 shadow-[0_0_22px_rgba(251,191,36,0.14)] transition-all duration-300 hover:scale-110 hover:border-amber-400/45 hover:text-amber-50 hover:shadow-[0_0_36px_rgba(251,191,36,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/50"
-                aria-label="GitHub"
+                aria-label="Skyrant on Facebook"
               >
                 <span
                   className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_40%,rgba(253,230,138,0.35),rgba(251,191,36,0.08),transparent_72%)] opacity-50 blur-md transition-opacity duration-300 group-hover:opacity-100"
                   aria-hidden
                 />
-                <Github className="relative z-10 h-5 w-5 drop-shadow-[0_0_12px_rgba(253,230,138,0.4)]" />
+                <Facebook className="relative z-10 h-5 w-5 drop-shadow-[0_0_12px_rgba(253,230,138,0.4)]" />
               </a>
               <a
-                href="#"
+                href={LINKEDIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group relative flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-black/45 text-gray-300 shadow-[0_0_22px_rgba(251,191,36,0.14)] transition-all duration-300 hover:scale-110 hover:border-amber-400/45 hover:text-amber-50 hover:shadow-[0_0_36px_rgba(251,191,36,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/50"
-                aria-label="LinkedIn"
+                aria-label="Skyrant on LinkedIn"
               >
                 <span
                   className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_40%,rgba(253,230,138,0.35),rgba(251,191,36,0.08),transparent_72%)] opacity-50 blur-md transition-opacity duration-300 group-hover:opacity-100"
                   aria-hidden
                 />
                 <Linkedin className="relative z-10 h-5 w-5 drop-shadow-[0_0_12px_rgba(253,230,138,0.4)]" />
-              </a>
-              <a
-                href="#"
-                className="group relative flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-black/45 text-gray-300 shadow-[0_0_22px_rgba(251,191,36,0.14)] transition-all duration-300 hover:scale-110 hover:border-amber-400/45 hover:text-amber-50 hover:shadow-[0_0_36px_rgba(251,191,36,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/50"
-                aria-label="X"
-              >
-                <span
-                  className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_40%,rgba(253,230,138,0.35),rgba(251,191,36,0.08),transparent_72%)] opacity-50 blur-md transition-opacity duration-300 group-hover:opacity-100"
-                  aria-hidden
-                />
-                <span className="relative z-10 drop-shadow-[0_0_12px_rgba(253,230,138,0.4)]">
-                  <XIcon />
-                </span>
               </a>
             </div>
           </div>
